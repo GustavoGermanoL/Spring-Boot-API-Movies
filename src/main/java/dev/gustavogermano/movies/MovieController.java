@@ -43,7 +43,18 @@ public class MovieController {
     }
 
     @PutMapping("/edit/{imdbId}")
-    public ResponseEntity<Movie> editAMovie(@RequestBody MovieDTO movieDTO){
-        Movie editedMovie = movieService.
+    public ResponseEntity<Movie> editAMovie(@PathVariable String imdbId, @RequestBody MovieDTO movieDTO) {
+        Movie editedMovie = movieService.editAMovie(imdbId, movieDTO);
+
+        return new ResponseEntity<>(editedMovie, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{imdbId}")
+    public ResponseEntity<String> deleteAMovie(@PathVariable String imdbId){
+        String msg = movieService.deleteAMovie(imdbId);
+
+        return new ResponseEntity<>(msg, HttpStatus.OK);
+    }
+
+
 }
